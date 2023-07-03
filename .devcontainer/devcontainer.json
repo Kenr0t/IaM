@@ -1,0 +1,65 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.112.0/containers/azure-terraform-0.12
+{
+    "name": "Infrastructure as Minecraft",
+    "dockerFile": "Dockerfile",
+    // When we have a lot of files in a project (npm creates a lot of files in node_modules)
+    // Disk performance will get slower on Windows and OSX, Microsoft recommend changing the consistency to delegated
+    // see <https://code.visualstudio.com/docs/remote/containers-advanced>
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=bind",
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+        // "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+        // "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
+    ],
+    "customizations": {
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "Bash": {
+                        "path": "/bin/bash"
+                    }
+                },
+                "terminal.integrated.defaultProfile.windows": "Bash"
+            },
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+				"ms-azuretools.vscode-docker",
+				"davidanson.vscode-markdownlint",
+				"pkief.material-icon-theme",
+				"wayou.vscode-todo-highlight",
+				"timonwong.shellcheck",
+				"sidp.strict-whitespace",
+				"humao.rest-client",
+				"hediet.vscode-drawio",
+				"editorconfig.editorconfig",
+				"eamodio.gitlens",
+				"ritwickdey.LiveServer",
+				"ms-vsliveshare.vsliveshare",
+				"GitHub.copilot",
+				"vscjava.vscode-gradle",
+				"vscjava.vscode-java-pack"
+			]
+        }
+    },
+    // -- Internal Ports --
+    // Use the next line if you want to publish any ports.
+    // Jupyter Notebook listening on port 8888...
+    "appPort": [
+    ],
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    "forwardPorts": [
+        8080
+    ],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postStartCommand": "bash run_jupyter.sh &",
+    "postAttachCommand": "",
+    // "runArgs": ["--env-file", ".env"],
+    // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "vscode",
+    "remoteEnv": {
+        "PYTHONPATH": "/workspace/src"
+    }
+}
