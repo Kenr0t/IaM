@@ -58,9 +58,9 @@ RUN curl -fsSL https://starship.rs/install.sh | sh -s -- --yes &&\
 RUN curl -s "https://get.sdkman.io" | bash
 
 # Install Gradle 8.2
-SHELL ["/bin/bash", "-c"]    
+SHELL ["/bin/bash", "-c"]
 RUN source "/root/.sdkman/bin/sdkman-init.sh" && \
-    sdk install gradle 8.2
+    sdk install gradle 7.5.1
 
 
 # re-enable dialog mode for apt-get
